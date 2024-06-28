@@ -55,6 +55,8 @@ resource "aws_instance" "web" {
               [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
               [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
               nvm install --lts # Latest stable node js server version
+              git clone https://github.com/zx2a17/nodejs-aws-codedeploy-pipeline.git
+              cd nodejs-aws-codedeploy-pipeline
               EOF
 }
               # #!/bin/bash
