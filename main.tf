@@ -7,19 +7,23 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.52.0"
     }
-    random = {
-      source  = "hashicorp/random"
-      version = "3.4.3"
+    serverscom = {
+      source = "serverscom/serverscom"
+      version = "0.4.2"
     }
+#    random = {
+#      source  = "hashicorp/random"
+#      version = "3.4.3"
+#    }
   }
-  required_version = ">= 1.1.0"
+  #required_version = ">= 1.1.0"
 }
 
 provider "aws" {
   region = "eu-central-1"
 }
 
-resource "random_pet" "sg" {}
+#resource "random_pet" "sg" {}
 
 # data "aws_ami" "ubuntu" {
 #   most_recent = true
@@ -38,17 +42,21 @@ resource "random_pet" "sg" {}
 # }
 
 resource "aws_instance" "web" {
-  ami                    = ami-04f1b917806393faa #this is now hard coded, need to figure out how to do the aboe way that is commented out atm
+  ami                    = "ami-04f1b917806393faa" #this is now hard coded, need to figure out how to do the aboe way that is commented out atm
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
-
   user_data = <<-EOF
-              sudo yum update
+              #!/bin/bash
+              sudo yum update -y
               sudo yum upgrade
               sudo yum install -y git htop wget
+              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+              export NVM_DIR="$HOME/.nvm"
+              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+              [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+              nvm install --lts # Latest stable node js server version
               EOF
 }
-
               # #!/bin/bash
               # apt-get update
               # apt-get install -y apache2
@@ -57,7 +65,7 @@ resource "aws_instance" "web" {
               # systemctl restart apache2
 
 resource "aws_security_group" "web-sg" {
-  name = "${random_pet.sg.id}-sg"
+#  name = "${random_pet.sg.id}-sg"
   ingress {
     from_port   = 80
     to_port     = 80
