@@ -47,6 +47,7 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data = <<-EOF
               #!/bin/bash
+              echo "Hello, World!" > hello.txt
               sudo yum update -y
               sudo yum upgrade
               sudo yum install -y git htop wget
