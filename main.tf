@@ -56,7 +56,7 @@ resource "aws_instance" "web" {
               # systemctl restart apache2
 
 resource "aws_security_group" "web-sg" {
-  name = "${random_pet.sg.id}-sg"
+#  name = "${random_pet.sg.id}-sg"
   ingress {
     from_port   = 80
     to_port     = 80
