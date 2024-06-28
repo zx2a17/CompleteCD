@@ -41,7 +41,6 @@ resource "aws_instance" "web" {
   ami                    = "ami-04f1b917806393faa" #this is now hard coded, need to figure out how to do the aboe way that is commented out atm
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
-
   user_data = <<-EOF
               sudo yum update
               sudo yum upgrade
