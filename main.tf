@@ -1,7 +1,7 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-terraform {
+#terraform {
 #  required_providers {
 #    aws = {
 #      source  = "hashicorp/aws"
@@ -19,7 +19,7 @@ provider "aws" {
   region = "eu-central-1"
 }
 
-resource "random_pet" "sg" {}
+#resource "random_pet" "sg" {}
 
 # data "aws_ami" "ubuntu" {
 #   most_recent = true
@@ -40,7 +40,7 @@ resource "random_pet" "sg" {}
 resource "aws_instance" "web" {
   ami                    = "ami-04f1b917806393faa" #this is now hard coded, need to figure out how to do the aboe way that is commented out atm
   instance_type          = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.web-sg.id]
+  #vpc_security_group_ids = [aws_security_group.web-sg.id]
 
   user_data = <<-EOF
               sudo yum update
