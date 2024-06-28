@@ -48,7 +48,6 @@ resource "aws_instance" "web" {
               sudo yum install -y git htop wget
               EOF
 }
-
               # #!/bin/bash
               # apt-get update
               # apt-get install -y apache2
