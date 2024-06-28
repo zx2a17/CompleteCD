@@ -57,6 +57,17 @@ resource "aws_instance" "web" {
               nvm install --lts # Latest stable node js server version
               git clone https://github.com/zx2a17/nodejs-aws-codedeploy-pipeline.git
               cd nodejs-aws-codedeploy-pipeline
+              npm install
+              npm install -g pm2 # may require sudo
+              sudo ln -s "$(which node)" /sbin/node
+              sudo ln -s "$(which npm)" /sbin/npm
+              sudo ln -s "$(which pm2)" /sbin/pm2
+              sudo pm2 start app.js --name=nodejs-express-app
+              sudo pm2 save     # saves the running processes
+                  # if not saved, pm2 will forget
+                  # the running apps on next boot
+              sudo pm2 startup # starts pm2 on computer boot
+              
               EOF
 }
               # #!/bin/bash
