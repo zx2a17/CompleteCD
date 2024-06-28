@@ -7,12 +7,16 @@ terraform {
       source  = "hashicorp/aws"
       version = "4.52.0"
     }
+    serverscom = {
+      source = "serverscom/serverscom"
+      version = "0.4.2"
+    }
 #    random = {
 #      source  = "hashicorp/random"
 #      version = "3.4.3"
 #    }
   }
-  required_version = ">= 1.1.0"
+  #required_version = ">= 1.1.0"
 }
 
 provider "aws" {
@@ -42,6 +46,7 @@ resource "aws_instance" "web" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data = <<-EOF
+              #!/bin/bash
               sudo yum update
               sudo yum upgrade
               sudo yum install -y git htop wget
