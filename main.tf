@@ -47,8 +47,12 @@ resource "aws_instance" "web" {
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data = <<-EOF
                 #!/bin/bash
+                sudo yum update -y
+                sudo yum upgrade
+                sudo yum install -y git htop wget
                 echo "Hello, World!" > hello.txt
-                sudo -u ec2-user sh -c 'echo "Hello, World!" > hello.txt'
+                sudo -u ec2-user sh -c 'echo "Hello, World!" > hello.txt
+                sudo -u ec2-user sh -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
               EOF
 }
               # #!/bin/bash
