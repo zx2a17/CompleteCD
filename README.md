@@ -1,4 +1,4 @@
-# CompleteCD
+# complte-cd
 This repository is the place where I put together a complete CD pipeline (CI later on as well if I can manage)
 
 The plan is as follows
@@ -105,7 +105,7 @@ cd /home/ec2-user
 ```
 
 ```sh
-git clone https://github.com/saasscaleup/nodejs-aws-codedeploy-pipeline.git
+git clone https://github.com/zx2a17/complete-cd.git
 ```
 
 ### 5. Run node app.js  (Make sure everything working)
