@@ -46,17 +46,13 @@ resource "aws_instance" "web" {
   instance_type          = "t2.micro"
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data = <<-EOF
-              #!/bin/bash
-              sudo yum update -y
-              sudo yum upgrade
-              sudo yum install -y git htop wget
-              curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-              export NVM_DIR="$HOME/.nvm"
-              [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-              [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-              nvm install --lts # Latest stable node js server version
-              git clone https://github.com/zx2a17/nodejs-aws-codedeploy-pipeline.git
-              cd nodejs-aws-codedeploy-pipeline
+                #!/bin/bash
+                sudo yum update -y
+                sudo yum upgrade
+                sudo yum install -y git htop wget
+                echo "Hello, World!" > hello.txt
+                sudo -u ec2-user sh -c 'echo "Hello, World!" > hello.txt
+                sudo -u ec2-user sh -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
               EOF
 }
               # #!/bin/bash
