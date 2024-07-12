@@ -1,4 +1,4 @@
-# complte-cd
+# complete-cd
 This repository is the place where I put together a complete CD pipeline (CI later on as well if I can manage)
 
 The plan is as follows
