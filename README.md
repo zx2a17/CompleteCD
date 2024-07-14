@@ -111,7 +111,7 @@ git clone https://github.com/zx2a17/complete-cd.git
 ### 5. Run node app.js  (Make sure everything working)
 
 ```sh
-cd nodejs-aws-codedeploy-pipeline
+cd complete-cd
 ```
 
 ```sh
