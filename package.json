@@ -1,5 +1,5 @@
 {
-    "name": "complete-cd",
+    "name": "nodejs-aws-codedeploy-pipeline",
     "version": "1.0.0",
     "description": "Deploy nodejs app to aws ec2 ubuntu server with aws codedeploy and aws pipeline and Github action - CI / CD tutorial",
     "main": "app.js",
