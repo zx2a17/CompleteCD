@@ -8,7 +8,7 @@ jobs:
     steps:
       # Step 1
     - name: Checkout to repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
 
       # Step 2
     - name: Set AWS credentials
@@ -29,7 +29,8 @@ jobs:
         --github-location repository=${{ github.repository }},commitId=${{ github.sha }}
 
     - name: SonarQube Scan
-      uses: sonarsource/sonarqube-scan-action@v2.3.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
+      uses: kitabisa/sonarqube-action@master
+      #uses: sonarsource/sonarqube-scan-action@v2.3.0 # Ex: v2.1.0, See the latest version at https://github.com/marketplace/actions/official-sonarqube-scan
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
