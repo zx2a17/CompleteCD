@@ -5,65 +5,32 @@ terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "4.52.0"
+      version = "5.59.0"
     }
-    serverscom = {
-      source = "serverscom/serverscom"
-      version = "0.4.2"
-    }
-#    random = {
-#      source  = "hashicorp/random"
-#      version = "3.4.3"
-#    }
   }
-  #required_version = ">= 1.1.0"
 }
 
 provider "aws" {
-  region = "eu-central-1"
+  region = "ap-southeast-1"
 }
 
-#resource "random_pet" "sg" {}
-
-# data "aws_ami" "ubuntu" {
-#   most_recent = true
-
-#   filter {
-#     name   = "name"
-#     values = ["ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-*"]
-#   }
-
-#   filter {
-#     name   = "virtualization-type"
-#     values = ["hvm"]
-#   }
-
-#   owners = ["099720109477"] # Canonical
-# }
-
 resource "aws_instance" "web" {
-  ami                    = "ami-04f1b917806393faa" #this is now hard coded, need to figure out how to do the aboe way that is commented out atm
+  ami                    = "ami-012c2e8e24e2ae21d" #this is now hard coded, need to figure out how to do the aboe way that is commented out atm
   instance_type          = "t2.micro"
+  tags = {
+    Name = "complete-cd-v2"
+  }
   vpc_security_group_ids = [aws_security_group.web-sg.id]
   user_data = <<-EOF
                 #!/bin/bash
                 sudo yum update -y
                 sudo yum upgrade
                 sudo yum install -y git htop wget
-                echo "Hello, World!" > hello.txt
-                sudo -u ec2-user sh -c 'echo "Hello, World!" > hello.txt
-                sudo -u ec2-user sh -c 'curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash'
               EOF
 }
-              # #!/bin/bash
-              # apt-get update
-              # apt-get install -y apache2
-              # sed -i -e 's/80/8080/' /etc/apache2/ports.conf
-              # echo "Hello World" > /var/www/html/index.html
-              # systemctl restart apache2
 
 resource "aws_security_group" "web-sg" {
-#  name = "${random_pet.sg.id}-sg"
+  name = "cicd-sg"
   ingress {
     from_port   = 80
     to_port     = 80
